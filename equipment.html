@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment | Sigma Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { overflow-y: auto; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 350px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background-color: #222; 
+        }
+
+        /* Slider Styles */
+        .slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out, transform 5s ease-in-out;
+            transform: scale(1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Overlay — always on top of everything including images */
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.95));
+            z-index: 10; /* Always above slides */
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        /* Controls */
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            z-index: 11;
+            padding: 0 10px;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover .slider-controls {
+            opacity: 1;
+        }
+
+        .control-btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+
+        .control-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Placeholder shown when no images are loaded yet */
+        .placeholder-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            z-index: 1;
+            pointer-events: none;
+            line-height: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Join Now</a>
+            <a href="equipment.html" class="active">Equipment</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Equipment Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Our Equipment & Vibe</h2>
+        </div>
+        <div class="gallery-grid">
+            
+            <!-- Item 1: Heavy Weights -->
+            <div class="gallery-item" data-slider="1">
+                <div class="slider-container">
+                    <div class="slide active"><img src="images/equipment1-1.jpg" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="slide"><img src="images/equipment1-2.jpg" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="slide"><img src="images/equipment1-3.jpg" onerror="this.parentElement.style.display='none'"></div>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Heavy Weights Area</h3>
+                </div>
+                <div class="slider-controls">
+                    <button class="control-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Item 2: Advanced Machines -->
+            <div class="gallery-item" data-slider="2">
+                
+                <div class="slider-container">
+                    <div class="slide active"><img src="images/equipment2-1.jpg" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="slide"><img src="images/equipment2-2.jpg" onerror="this.parentElement.style.display='none'"></div>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Advanced Machines</h3>
+                </div>
+                <div class="slider-controls">
+                    <button class="control-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Item 3: Open Gym Floor -->
+            <div class="gallery-item" data-slider="3">
+                
+                <div class="slider-container">
+                    <div class="slide active"><img src="images/equipment3-1.jpg" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="slide"><img src="images/equipment3-2.jpg" onerror="this.parentElement.style.display='none'"></div>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Open Gym Floor</h3>
+                </div>
+                <div class="slider-controls">
+                    <button class="control-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Item 4: Dumbbell Racks -->
+            <div class="gallery-item" data-slider="4">
+                
+                <div class="slider-container">
+                    <div class="slide active"><img src="images/equipment4-1.jpg" onerror="this.parentElement.style.display='none'"></div>
+                    <div class="slide"><img src="images/equipment4-2.jpg" onerror="this.parentElement.style.display='none'"></div>
+                </div>
+                <div class="gallery-overlay">
+                    <h3>Dumbbell Racks</h3>
+                </div>
+                <div class="slider-controls">
+                    <button class="control-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="control-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Sigma Fitness, Dhanbad. Elevating Fitness.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Sliders Logic
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryItems.forEach(item => {
+            const slides = item.querySelectorAll('.slide');
+            const prevBtn = item.querySelector('.prev-btn');
+            const nextBtn = item.querySelector('.next-btn');
+            let currentSlide = 0;
+
+            // Only run logic if there are slides
+            if(slides.length > 0) {
+                // Next Slide Function
+                const nextSlide = () => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    
+                    // Skip hidden slides (if image failed to load)
+                    let attempts = 0;
+                    while(slides[currentSlide].style.display === 'none' && attempts < slides.length) {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        attempts++;
+                    }
+                    
+                    slides[currentSlide].classList.add('active');
+                };
+
+                // Previous Slide Function
+                const prevSlide = () => {
+                    slides[currentSlide].classList.remove('active');
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                    
+                    let attempts = 0;
+                    while(slides[currentSlide].style.display === 'none' && attempts < slides.length) {
+                        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                        attempts++;
+                    }
+
+                    slides[currentSlide].classList.add('active');
+                };
+
+                // Add button listeners
+                if(nextBtn) nextBtn.addEventListener('click', nextSlide);
+                if(prevBtn) prevBtn.addEventListener('click', prevSlide);
+
+                // Auto slide every 4 seconds
+                setInterval(nextSlide, 4000);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews | Sigma Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { overflow-y: auto; }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .review-card {
+            background: var(--bg-lighter);
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 4px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .review-info h4 {
+            font-family: 'Poppins', sans-serif;
+            text-transform: none;
+            font-size: 1.1rem;
+        }
+
+        .stars {
+            color: #fbbc04;
+            font-size: 0.9rem;
+        }
+
+        .google-icon {
+            margin-left: auto;
+            width: 20px;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Join Now</a>
+            <a href="equipment.html">Equipment</a>
+            <a href="reviews.html" class="active">Reviews</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Google Reviews Section -->
+    <section class="section">
+        <div class="section-header">
+            <h2>What Our Members Say</h2>
+        </div>
+        <div class="reviews-grid">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar" style="background: #4285F4;">R</div>
+                    <div class="review-info">
+                        <h4>Rahul Kumar</h4>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="google-icon">
+                </div>
+                <p class="review-text">"Best open gym setup in New Karmic Nagar. The equipments are premium and the environment is very motivating. Unbelievable that it's only ₹600/month!"</p>
+            </div>
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar" style="background: #DB4437;">S</div>
+                    <div class="review-info">
+                        <h4>Sneha Singh</h4>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="google-icon">
+                </div>
+                <p class="review-text">"5-star facility near DPS School. Very hygienic, well-maintained weight machines, and respectful crowd. You can work out at your own pace."</p>
+            </div>
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar" style="background: #0F9D58;">A</div>
+                    <div class="review-info">
+                        <h4>Aman Raj</h4>
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google" class="google-icon">
+                </div>
+                <p class="review-text">"The most affordable premium gym in Dhanbad. Excellent variety of weights and machines. The open gym vibe here makes you want to push your limits."</p>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="https://maps.app.goo.gl/bSUPrRarrqhEyM716" target="_blank" class="btn" style="background: transparent; color: var(--primary); border-color: var(--primary);">
+                <i class="fab fa-google"></i> Read More Reviews on Google
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Sigma Fitness, Dhanbad. Elevating Fitness.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma Fitness | Premium Open Gym</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Lock scrolling on the home page */
+        body {
+            overflow: hidden;
+            background-color: var(--bg-dark);
+        }
+
+        .hero {
+            height: 100vh;
+            /* Background from your local images folder */
+            background: linear-gradient(to right, rgba(7, 7, 7, 0.95) 0%, rgba(7, 7, 7, 0.4) 100%), url('images/background.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        /* Gym Aesthetics: Floating Animated Background Icons */
+        .floating-icon {
+            position: absolute;
+            color: rgba(230, 36, 41, 0.15); /* Faint primary red */
+            z-index: 1;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .icon-1 { top: 20%; right: 15%; font-size: 8rem; animation-delay: 0s; transform: rotate(15deg); }
+        .icon-2 { bottom: 15%; right: 25%; font-size: 6rem; animation-delay: 2s; transform: rotate(-20deg); }
+        .icon-3 { top: 30%; left: 45%; font-size: 5rem; animation-delay: 4s; opacity: 0.1; }
+        .icon-4 { bottom: 30%; left: 10%; font-size: 7rem; animation-delay: 1s; transform: rotate(45deg); }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* Vignette overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, #070707 150%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .hero-content {
+            max-width: 650px;
+            animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            position: relative;
+            z-index: 3;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        @keyframes slideInLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .hero-subtitle {
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            display: inline-block;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        /* Cool line animation next to subtitle */
+        .hero-subtitle::after {
+            content: '';
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .hero h1 {
+            font-size: 5.5rem;
+            line-height: 1.05;
+            margin-bottom: 25px;
+            text-shadow: 4px 4px 15px rgba(0,0,0,0.8);
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: #d1d1d1;
+            margin-bottom: 35px;
+            border-left: 3px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        .price-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(230, 36, 41, 0.15);
+            border: 1px solid var(--primary);
+            padding: 12px 25px;
+            border-radius: 4px; /* Sharper edges for gym vibe */
+            margin-bottom: 35px;
+            box-shadow: 0 4px 20px rgba(230, 36, 41, 0.25);
+            border-left: 4px solid var(--primary);
+            backdrop-filter: blur(5px);
+        }
+
+        .price-badge i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); text-shadow: 0 0 10px var(--primary); }
+            100% { transform: scale(1); }
+        }
+        
+        .price-badge span {
+            font-weight: 600;
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-badge span.highlight {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        /* Action Buttons */
+        .action-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        /* The hidden options that appear on click */
+        .options-container {
+            display: flex;
+            gap: 15px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 0;
+            overflow: hidden;
+        }
+
+        .options-container.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            height: auto;
+            overflow: visible;
+            margin-top: 15px;
+        }
+
+        .option-btn {
+            padding: 12px 25px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            text-decoration: none;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 3px solid transparent;
+            border-radius: 4px;
+            transition: 0.3s;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-btn i {
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .option-btn:hover {
+            background: rgba(230, 36, 41, 0.1);
+            border-bottom: 3px solid var(--primary);
+            border-color: rgba(230, 36, 41, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .option-btn:hover i {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 4.5rem; }
+            .floating-icon { display: none; /* Hide on smaller screens for cleanliness */ }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 3.2rem; }
+            .price-badge { flex-direction: column; text-align: center; gap: 5px; }
+            .options-container { flex-direction: column; width: 100%; }
+            .option-btn { width: 100%; justify-content: center; }
+            .btn { width: 100%; text-align: center; }
+            .hero-subtitle::after { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html" class="active">Join Now</a>
+            <a href="equipment.html">Equipment</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero / Join Now -->
+    <section class="hero">
+        
+        <!-- Gym Aesthetics: Animated Background Icons -->
+        <i class="fas fa-dumbbell floating-icon icon-1"></i>
+        <i class="fas fa-weight-hanging floating-icon icon-2"></i>
+        <i class="fas fa-bolt floating-icon icon-3"></i>
+        <i class="fas fa-dumbbell floating-icon icon-4"></i>
+
+        <div class="hero-content">
+            <span class="hero-subtitle">Push Your Limits</span>
+            <h1>THE MOST <span>PREMIUM</span> GYM IN DHANBAD</h1>
+            
+            <div class="price-badge">
+                <i class="fas fa-fire"></i>
+                <span>Premium Quality at an Unbeatable Price: <span class="highlight">₹600 / Month</span></span>
+            </div>
+
+            <p>Experience an incredible open gym atmosphere with top-of-the-line free weights and advanced machines. Everything you need for a complete transformation.</p>
+            
+            <div class="action-container">
+                <button id="join-btn" class="btn">Explore Sigma Fitness <i class="fas fa-chevron-down" style="margin-left: 8px;"></i></button>
+                
+                <div class="options-container" id="options">
+                    <a href="equipment.html" class="option-btn"><i class="fas fa-dumbbell"></i> Equipment</a>
+                    <a href="reviews.html" class="option-btn"><i class="fas fa-star"></i> Reviews</a>
+                    <a href="contact.html" class="option-btn"><i class="fas fa-map-marker-alt"></i> Location</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            if(navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Join Now Button Interaction
+        const joinBtn = document.getElementById('join-btn');
+        const options = document.getElementById('options');
+        const btnIcon = joinBtn.querySelector('i');
+
+        joinBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            options.classList.toggle('active');
+            
+            // Rotate arrow icon
+            if(options.classList.contains('active')) {
+                btnIcon.style.transform = 'rotate(180deg)';
+                btnIcon.style.transition = 'transform 0.3s';
+            } else {
+                btnIcon.style.transform = 'rotate(0deg)';
+            }
+        });
+    </script>
+</body>
+</html>
