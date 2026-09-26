@@ -9,86 +9,130 @@
     <link rel="stylesheet" href="style.css">
     <style>
         body { overflow-y: auto; }
-        
-        .contact-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
+
+        .contact-center {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
             background: var(--bg-lighter);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            border-top: 4px solid var(--primary);
         }
 
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-            padding: 50px;
-        }
-
-        .contact-info h3 {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--primary);
-        }
-
-        .info-block {
+        .contact-card-header {
+            background: rgba(230,36,41,0.1);
+            border-bottom: 1px solid rgba(230,36,41,0.2);
+            padding: 30px 40px;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 15px;
-            margin-bottom: 25px;
         }
 
-        .info-block i {
-            font-size: 1.5rem;
+        .contact-card-header i {
+            font-size: 2.5rem;
             color: var(--primary);
-            margin-top: 5px;
         }
 
-        .info-block h5 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.1rem;
+        .contact-card-header h3 {
+            font-size: 1.8rem;
             color: white;
-            margin-bottom: 5px;
         }
 
-        .info-block p {
-            color: var(--text-muted);
+        .contact-card-header p {
+            color: #888;
+            font-size: 0.9rem;
         }
 
-        .map-container {
-            flex: 1;
-            min-width: 300px;
-            min-height: 400px;
+        .contact-card-body {
+            padding: 40px;
         }
 
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        
-        @media (max-width: 600px) {
-            .contact-info { padding: 30px; }
-        }
-
-        /* Call & WhatsApp Buttons */
-        .contact-btns {
+        /* Fee highlight */
+        .fee-row {
             display: flex;
-            gap: 10px;
-            margin-top: 12px;
+            align-items: center;
+            gap: 15px;
+            background: rgba(230,36,41,0.08);
+            border: 1px solid rgba(230,36,41,0.3);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            padding: 20px 25px;
+            margin-bottom: 35px;
+        }
+
+        .fee-row i { color: var(--primary); font-size: 1.8rem; }
+
+        .fee-row .fee-label {
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .fee-row .fee-amount {
+            color: var(--primary);
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .fee-row .fee-sub {
+            color: #777;
+            font-size: 0.8rem;
+            margin-top: 3px;
+        }
+
+        /* Number rows */
+        .phone-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 18px 0;
+            border-bottom: 1px solid #1e1e1e;
             flex-wrap: wrap;
         }
 
-        .contact-action-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            border-radius: 4px;
+        .phone-row:last-of-type { border-bottom: none; margin-bottom: 30px; }
+
+        .phone-meta .label {
+            font-size: 0.78rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .phone-meta .number {
             font-family: 'Oswald', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        /* Call and WhatsApp Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            flex: 1;
+            min-width: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 20px;
+            border-radius: 6px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             text-decoration: none;
@@ -99,7 +143,7 @@
             background: var(--primary);
             color: white;
             border: 2px solid var(--primary);
-            box-shadow: 0 4px 15px rgba(230, 36, 41, 0.35);
+            box-shadow: 0 4px 20px rgba(230,36,41,0.4);
         }
 
         .call-btn:hover {
@@ -111,104 +155,124 @@
             background: #25d366;
             color: white;
             border: 2px solid #25d366;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+            box-shadow: 0 4px 20px rgba(37,211,102,0.35);
         }
 
         .whatsapp-btn:hover {
             background: transparent;
             color: #25d366;
         }
+
+        .demo-note {
+            margin-top: 30px;
+            background: #0f0f0f;
+            border: 1px solid #222;
+            border-radius: 6px;
+            padding: 16px 20px;
+            color: #777;
+            font-size: 0.88rem;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .demo-note strong { color: var(--primary); }
+
+        @media (max-width: 600px) {
+            .contact-card-header { padding: 20px 25px; }
+            .contact-card-body { padding: 25px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
     <nav>
         <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <div class="nav-links" id="nav-links">
-            <a href="index.html">Join Now</a>
+            <a href="index.html">Home</a>
             <a href="equipment.html">Equipment</a>
             <a href="reviews.html">Reviews</a>
+            <a href="policy.html">Policy</a>
+            <a href="location.html">Location</a>
             <a href="contact.html" class="active">Contact</a>
         </div>
     </nav>
 
-    <!-- Contact Section -->
     <section class="section">
         <div class="section-header">
-            <h2>Visit Sigma Fitness</h2>
+            <h2>Join Sigma Fitness</h2>
         </div>
-        <div class="contact-wrapper">
-            <div class="contact-info">
-                <h3>Get In Touch</h3>
-                
-                <div class="info-block">
-                    <i class="fas fa-map-marker-alt"></i>
+
+        <div class="contact-center">
+            <div class="contact-card">
+
+                <div class="contact-card-header">
+                    <i class="fas fa-dumbbell"></i>
                     <div>
-                        <h5>Location</h5>
-                        <p>New Karmik Nagar, Dhanbad, Jharkhand<br>Opposite Jingle Bells Fun School, Near DPS School</p>
+                        <h3>Ready to Start?</h3>
+                        <p>Call us or send a WhatsApp message to get started today.</p>
                     </div>
                 </div>
 
-                <div class="info-block">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <h5>Hours</h5>
-                        <p>Open Everyday: 5:00 AM to 9:30 PM</p>
-                    </div>
-                </div>
-
-                <div class="info-block">
-                    <i class="fas fa-phone-alt"></i>
-                    <div>
-                        <h5>Call Us</h5>
-                        <p>+91 8340114062</p>
-                        <div class="contact-btns">
-                            <a href="tel:+918340114062" class="contact-action-btn call-btn">
-                                <i class="fas fa-phone-alt"></i> Call Now
-                            </a>
-                            <a href="https://wa.me/918340114062?text=Hi%2C%20I%20want%20to%20know%20more%20about%20Sigma%20Fitness%20membership!" target="_blank" class="contact-action-btn whatsapp-btn">
-                                <i class="fab fa-whatsapp"></i> WhatsApp
-                            </a>
+                <div class="contact-card-body">
+                    <!-- Membership Fee -->
+                    <div class="fee-row">
+                        <i class="fas fa-fire"></i>
+                        <div>
+                            <div class="fee-label">Monthly Membership Fee</div>
+                            <div class="fee-amount">₹600</div>
+                            <div class="fee-sub">Dhanbad's most affordable premium gym</div>
                         </div>
                     </div>
-                </div>
 
-                <div class="info-block">
-                    <i class="fas fa-tag"></i>
-                    <div>
-                        <h5>Membership</h5>
-                        <p style="color: var(--primary); font-weight: bold; font-size: 1.2rem;">₹600 / Month Only</p>
+                    <!-- Primary Number -->
+                    <div class="phone-row">
+                        <div class="phone-meta">
+                            <div class="label">Primary Number</div>
+                            <div class="number">+91 9693482220</div>
+                        </div>
+                    </div>
+
+                    <!-- Alternate Number -->
+                    <div class="phone-row">
+                        <div class="phone-meta">
+                            <div class="label">Alternate Number</div>
+                            <div class="number">+91 8340114062</div>
+                        </div>
+                    </div>
+
+                    <!-- Call + WhatsApp Buttons -->
+                    <div class="cta-buttons">
+                        <a href="tel:+919693482220" class="cta-btn call-btn">
+                            <i class="fas fa-phone-alt"></i> Call Now
+                        </a>
+                        <a href="https://wa.me/919693482220?text=Hi%2C%20I%20want%20to%20join%20Sigma%20Fitness!%20Please%20share%20details." target="_blank" class="cta-btn whatsapp-btn">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                    </div>
+
+                    <div class="demo-note">
+                        💡 Want to try before you join? A <strong>₹200 refundable demo deposit</strong> gets you a trial session — fully refunded if you don't join. 
+                        <a href="policy.html" style="color: var(--primary); text-decoration:none;">Read full policy →</a>
                     </div>
                 </div>
-            </div>
-            
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.0789822923552!2d86.4498783!3d23.8157903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6bd09e4246feb%3A0x21cdd5dcbebd47c2!2sSigma%20Fitness!5e0!3m2!1sen!2sin!4v1695167999999!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Sigma Fitness, Dhanbad. Elevating Fitness.</p>
+        <p>&copy; 2026 Sigma Fitness, Dhanbad. Elevating Fitness.</p>
     </footer>
 
     <script>
         const menuBtn = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
-
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             const icon = menuBtn.querySelector('i');
-            if(navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
         });
     </script>
 </body>

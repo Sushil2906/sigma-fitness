@@ -9,221 +9,595 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* Lock scrolling on the home page */
         body {
-            overflow: hidden;
-            background-color: var(--bg-dark);
+            overflow-y: auto;
+            background: #070707;
         }
 
+        /* ── HERO ── */
         .hero {
-            height: 100vh;
-            /* Background from your local images folder */
-            background: linear-gradient(to right, rgba(7, 7, 7, 0.95) 0%, rgba(7, 7, 7, 0.4) 100%), url('images/background.jpg') center/cover no-repeat;
+            min-height: 100vh;
+            background:
+                linear-gradient(115deg, rgba(7,7,7,0.97) 0%, rgba(7,7,7,0.55) 60%, rgba(230,36,41,0.08) 100%),
+                url('images/background.jpg') center/cover no-repeat;
+            background-color: #0d0d0d;
             display: flex;
             align-items: center;
-            padding: 0 10%;
+            padding: 110px 8% 70px;
             position: relative;
+            overflow: hidden;
         }
 
-        /* Gym Aesthetics: Floating Animated Background Icons */
-        .floating-icon {
-            position: absolute;
-            color: rgba(230, 36, 41, 0.15); /* Faint primary red */
-            z-index: 1;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .icon-1 { top: 20%; right: 15%; font-size: 8rem; animation-delay: 0s; transform: rotate(15deg); }
-        .icon-2 { bottom: 15%; right: 25%; font-size: 6rem; animation-delay: 2s; transform: rotate(-20deg); }
-        .icon-3 { top: 30%; left: 45%; font-size: 5rem; animation-delay: 4s; opacity: 0.1; }
-        .icon-4 { bottom: 30%; left: 10%; font-size: 7rem; animation-delay: 1s; transform: rotate(45deg); }
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
-
-        /* Vignette overlay */
-        .hero::before {
+        /* Red glow bottom-right corner */
+        .hero::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, #070707 150%);
+            bottom: -100px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(230,36,41,0.18) 0%, transparent 70%);
             pointer-events: none;
-            z-index: 2;
+            z-index: 1;
         }
 
+        /* Animated background dumbbells */
+        .bg-dumbbell {
+            position: absolute;
+            color: rgba(230,36,41,0.07);
+            pointer-events: none;
+            z-index: 1;
+            line-height: 1;
+        }
+
+        .bd1 { top: 12%; right: 8%;  font-size: 9rem;  animation: bdFloat 10s ease-in-out infinite; }
+        .bd2 { bottom: 8%;  right: 20%; font-size: 6rem;  animation: bdFloat 7s ease-in-out infinite 2s; }
+        .bd3 { top: 55%;  left: 40%;  font-size: 5rem;  animation: bdFloat 9s ease-in-out infinite 4s; opacity: 0.5; }
+        .bd4 { top: 80%;  left: 3%;   font-size: 8rem;  animation: bdFloat 8s ease-in-out infinite 1s; }
+        .bd5 { top: 25%;  right: 35%; font-size: 3.5rem; animation: bdFloat 12s ease-in-out infinite 3s; opacity: 0.4; }
+
+        @keyframes bdFloat {
+            0%,100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            33%      { transform: translateY(-18px) rotate(8deg)  scale(1.05); }
+            66%      { transform: translateY(10px)  rotate(-5deg) scale(0.97); }
+        }
+
+        /* ── HERO CONTENT ── */
         .hero-content {
-            max-width: 650px;
-            animation: slideInLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
             position: relative;
             z-index: 3;
-            opacity: 0;
-            transform: translateX(-50px);
+            max-width: 680px;
+            animation: heroEntrance 1.4s cubic-bezier(0.22,1,0.36,1) both;
         }
 
-        @keyframes slideInLeft {
-            to { opacity: 1; transform: translateX(0); }
+        @keyframes heroEntrance {
+            from { opacity:0; transform: translateY(40px); }
+            to   { opacity:1; transform: translateY(0); }
         }
 
-        .hero-subtitle {
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             color: var(--primary);
-            font-weight: 600;
-            letter-spacing: 5px;
-            margin-bottom: 10px;
-            display: inline-block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            position: relative;
+            margin-bottom: 18px;
         }
 
-        /* Cool line animation next to subtitle */
-        .hero-subtitle::after {
+        .hero-eyebrow::before,
+        .hero-eyebrow::after {
             content: '';
-            position: absolute;
-            right: -60px;
-            top: 50%;
-            width: 40px;
-            height: 2px;
-            background-color: var(--primary);
+            width: 30px;
+            height: 1px;
+            background: var(--primary);
         }
 
         .hero h1 {
             font-size: 5.5rem;
-            line-height: 1.05;
-            margin-bottom: 25px;
-            text-shadow: 4px 4px 15px rgba(0,0,0,0.8);
+            line-height: 1;
+            margin-bottom: 22px;
+            font-weight: 700;
             letter-spacing: -1px;
         }
 
-        .hero h1 span {
+        .hero h1 em {
+            font-style: normal;
             color: transparent;
             -webkit-text-stroke: 2px var(--primary);
+            display: block;
         }
 
-        .hero p {
-            font-size: 1.15rem;
-            color: #d1d1d1;
-            margin-bottom: 35px;
+        .hero-desc {
+            font-size: 1.05rem;
+            color: #bbb;
+            margin-bottom: 28px;
+            padding-left: 16px;
             border-left: 3px solid var(--primary);
-            padding-left: 15px;
+            line-height: 1.75;
+            max-width: 500px;
         }
 
-        .price-badge {
+        /* Price pill */
+        .price-pill {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            background: rgba(230, 36, 41, 0.15);
-            border: 1px solid var(--primary);
-            padding: 12px 25px;
-            border-radius: 4px; /* Sharper edges for gym vibe */
-            margin-bottom: 35px;
-            box-shadow: 0 4px 20px rgba(230, 36, 41, 0.25);
+            gap: 12px;
+            background: rgba(230,36,41,0.1);
+            border: 1px solid rgba(230,36,41,0.4);
             border-left: 4px solid var(--primary);
-            backdrop-filter: blur(5px);
-        }
-
-        .price-badge i {
-            color: var(--primary);
-            font-size: 1.2rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); text-shadow: 0 0 10px var(--primary); }
-            100% { transform: scale(1); }
-        }
-        
-        .price-badge span {
-            font-weight: 600;
-            color: white;
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .price-badge span.highlight {
-            color: var(--primary);
-            font-size: 1.4rem;
-            font-weight: 700;
-        }
-
-        /* Action Buttons */
-        .action-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        /* The hidden options that appear on click */
-        .options-container {
-            display: flex;
-            gap: 15px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-20px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            height: 0;
+            padding: 12px 22px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            position: relative;
             overflow: hidden;
         }
 
-        .options-container.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-            height: auto;
-            overflow: visible;
-            margin-top: 15px;
+        /* shimmer sweep */
+        .price-pill::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: shimmer 3s infinite 2s;
         }
 
-        .option-btn {
-            padding: 12px 25px;
-            background: rgba(255,255,255,0.05);
-            color: white;
-            text-decoration: none;
+        @keyframes shimmer {
+            to { left: 150%; }
+        }
+
+        .price-pill .fire-icon {
+            font-size: 1.3rem;
+            color: var(--primary);
+            animation: fireAnim 1.5s ease-in-out infinite;
+        }
+
+        @keyframes fireAnim {
+            0%,100% { transform: scale(1) rotate(-5deg); }
+            50%      { transform: scale(1.25) rotate(5deg); filter: brightness(1.3); }
+        }
+
+        .price-pill-text {
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
-            font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.1);
-            border-bottom: 3px solid transparent;
-            border-radius: 4px;
-            transition: 0.3s;
-            backdrop-filter: blur(5px);
+            letter-spacing: 1px;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .price-pill-amount {
+            color: var(--primary);
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        /* ── BUTTONS ── */
+        .btn-row {
             display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        /* Join Now — primary solid red */
+        .btn-join {
+            position: relative;
+            display: inline-flex;
             align-items: center;
             gap: 10px;
+            padding: 16px 38px;
+            background: var(--primary);
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: box-shadow 0.3s, transform 0.3s;
+            box-shadow: 0 6px 25px rgba(230,36,41,0.5);
         }
 
-        .option-btn i {
-            color: var(--primary);
-            transition: 0.3s;
+        .btn-join::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .option-btn:hover {
-            background: rgba(230, 36, 41, 0.1);
-            border-bottom: 3px solid var(--primary);
-            border-color: rgba(230, 36, 41, 0.3);
+        .btn-join:hover::before { opacity: 1; }
+        .btn-join:hover {
+            box-shadow: 0 10px 35px rgba(230,36,41,0.7);
             transform: translateY(-3px);
         }
 
-        .option-btn:hover i {
-            transform: scale(1.2);
+        .btn-join .btn-arrow {
+            transition: transform 0.3s;
+        }
+        .btn-join:hover .btn-arrow { transform: translateX(5px); }
+
+        /* Explore Now — outlined */
+        .btn-explore {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 38px;
+            background: transparent;
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
+        .btn-explore::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.04);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .btn-explore:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 0 1px rgba(230,36,41,0.3), 0 8px 25px rgba(230,36,41,0.15);
+            transform: translateY(-3px);
+        }
+
+        .btn-explore:hover::before { opacity: 1; }
+
+        .btn-explore .dumbbell-icon {
+            transition: transform 0.6s cubic-bezier(0.34,1.56,0.64,1);
+            color: var(--primary);
+        }
+
+        .btn-explore:hover .dumbbell-icon {
+            transform: rotate(20deg) scale(1.25);
+        }
+
+        .btn-explore.active-state {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(230,36,41,0.06);
+        }
+
+        /* ── EXPLORE CARDS ── */
+        .explore-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition:
+                max-height 0.5s cubic-bezier(0.4,0,0.2,1),
+                opacity    0.5s cubic-bezier(0.4,0,0.2,1) 0.1s,
+                transform  0.5s cubic-bezier(0.4,0,0.2,1) 0.1s;
+        }
+
+        .explore-cards.revealed {
+            max-height: 200px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .explore-card {
+            position: relative;
+            text-decoration: none;
+            background: rgba(18,18,18,0.9);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 3px solid rgba(230,36,41,0.3);
+            border-radius: 6px;
+            padding: 20px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+            overflow: hidden;
+        }
+
+        /* card enter stagger */
+        .explore-card:nth-child(1) { transition-delay: 0.05s; }
+        .explore-card:nth-child(2) { transition-delay: 0.12s; }
+        .explore-card:nth-child(3) { transition-delay: 0.19s; }
+
+        .explore-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(230,36,41,0.08) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .explore-card:hover {
+            border-color: rgba(230,36,41,0.6);
+            border-bottom-color: var(--primary);
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 0 1px rgba(230,36,41,0.2);
+        }
+
+        .explore-card:hover::before { opacity: 1; }
+
+        .explore-card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(230,36,41,0.12);
+            border: 1px solid rgba(230,36,41,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+
+        .explore-card:hover .explore-card-icon {
+            background: var(--primary);
+            color: white;
+            transform: rotate(10deg) scale(1.1);
+            box-shadow: 0 4px 15px rgba(230,36,41,0.5);
+        }
+
+        .explore-card-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ddd;
+            transition: color 0.3s;
+        }
+
+        .explore-card:hover .explore-card-label { color: var(--primary); }
+
+        .explore-card-sub {
+            font-size: 0.7rem;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── DUMBBELL BURST ── */
+        .burst-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .burst-icon {
+            font-size: 0;
+            color: var(--primary);
+            opacity: 0;
+        }
+
+        .burst-icon.animate {
+            animation: burstPop 0.75s cubic-bezier(0.22,1,0.36,1) forwards;
+        }
+
+        @keyframes burstPop {
+            0%   { font-size: 0;    opacity: 0;   transform: rotate(-30deg) scale(0); }
+            40%  { font-size: 8rem; opacity: 1;   transform: rotate(10deg) scale(1.2); filter: drop-shadow(0 0 30px rgba(230,36,41,0.8)); }
+            70%  { font-size: 7rem; opacity: 0.9; transform: rotate(-5deg) scale(1); }
+            100% { font-size: 0;    opacity: 0;   transform: rotate(5deg) scale(0.5); }
+        }
+
+        /* ── POLICY MODAL ── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 8000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            padding: 20px;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal-box {
+            background: #0f0f0f;
+            border: 1px solid rgba(230,36,41,0.3);
+            border-top: 4px solid var(--primary);
+            border-radius: 10px;
+            max-width: 580px;
+            width: 100%;
+            padding: 40px;
+            animation: modalPop 0.45s cubic-bezier(0.34,1.56,0.64,1);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(230,36,41,0.1);
+        }
+
+        @keyframes modalPop {
+            from { opacity:0; transform: scale(0.88) translateY(20px); }
+            to   { opacity:1; transform: scale(1)    translateY(0); }
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 6px;
+        }
+
+        .modal-head-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(230,36,41,0.12);
+            border: 1px solid rgba(230,36,41,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary);
+        }
+
+        .modal-box h2 {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .modal-subtitle {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #1a1a1a;
+            padding-left: 64px;
+        }
+
+        .policy-list { list-style: none; margin-bottom: 25px; }
+
+        .policy-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid #141414;
+            color: #bbb;
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+
+        .policy-list li:last-child { border-bottom: none; }
+
+        .p-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: rgba(230,36,41,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .policy-list li strong { color: #eee; }
+
+        .agree-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(230,36,41,0.06);
+            border: 1px solid rgba(230,36,41,0.25);
+            border-radius: 6px;
+            margin-bottom: 22px;
+        }
+
+        .agree-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .agree-row label {
+            color: #aaa;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            cursor: pointer;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .btn-cancel-modal {
+            padding: 12px 24px;
+            background: transparent;
+            color: #666;
+            border: 1px solid #222;
+            border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .btn-cancel-modal:hover { color: white; border-color: #555; }
+
+        .btn-proceed-modal {
+            padding: 12px 28px;
+            background: var(--primary);
+            color: white;
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 18px rgba(230,36,41,0.4);
+            opacity: 0.35;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-proceed-modal.on {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .btn-proceed-modal.on:hover {
+            background: transparent;
+            color: var(--primary);
+        }
+
+        /* ── RESPONSIVE ── */
         @media (max-width: 900px) {
-            .hero h1 { font-size: 4.5rem; }
-            .floating-icon { display: none; /* Hide on smaller screens for cleanliness */ }
+            .hero h1 { font-size: 4rem; }
+            .explore-cards { grid-template-columns: 1fr 1fr 1fr; }
+            .bd1,.bd3,.bd4,.bd5 { display: none; }
         }
 
         @media (max-width: 600px) {
-            .hero h1 { font-size: 3.2rem; }
-            .price-badge { flex-direction: column; text-align: center; gap: 5px; }
-            .options-container { flex-direction: column; width: 100%; }
-            .option-btn { width: 100%; justify-content: center; }
-            .btn { width: 100%; text-align: center; }
-            .hero-subtitle::after { display: none; }
+            .hero { padding: 100px 6% 60px; }
+            .hero h1 { font-size: 3rem; }
+            .btn-row { flex-direction: column; }
+            .btn-join, .btn-explore { width: 100%; justify-content: center; }
+            .explore-cards { grid-template-columns: 1fr; }
+            .explore-cards.revealed { max-height: 500px; }
         }
     </style>
 </head>
@@ -234,80 +608,199 @@
         <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <div class="nav-links" id="nav-links">
-            <a href="index.html" class="active">Join Now</a>
+            <a href="index.html" class="active">Home</a>
             <a href="equipment.html">Equipment</a>
             <a href="reviews.html">Reviews</a>
+            <a href="policy.html">Policy</a>
+            <a href="location.html">Location</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero / Join Now -->
+    <!-- Dumbbell burst overlay -->
+    <div class="burst-overlay">
+        <i class="fas fa-dumbbell burst-icon" id="burst"></i>
+    </div>
+
+    <!-- Hero -->
     <section class="hero">
-        
-        <!-- Gym Aesthetics: Animated Background Icons -->
-        <i class="fas fa-dumbbell floating-icon icon-1"></i>
-        <i class="fas fa-weight-hanging floating-icon icon-2"></i>
-        <i class="fas fa-bolt floating-icon icon-3"></i>
-        <i class="fas fa-dumbbell floating-icon icon-4"></i>
+        <!-- background dumbbells -->
+        <i class="fas fa-dumbbell bg-dumbbell bd1"></i>
+        <i class="fas fa-weight-hanging bg-dumbbell bd2"></i>
+        <i class="fas fa-bolt bg-dumbbell bd3"></i>
+        <i class="fas fa-dumbbell bg-dumbbell bd4"></i>
+        <i class="fas fa-circle bg-dumbbell bd5"></i>
 
         <div class="hero-content">
-            <span class="hero-subtitle">Push Your Limits</span>
-            <h1>THE MOST <span>PREMIUM</span> GYM IN DHANBAD</h1>
-            
-            <div class="price-badge">
+
+            <div class="hero-eyebrow">
                 <i class="fas fa-fire"></i>
-                <span>Premium Quality at an Unbeatable Price: <span class="highlight">₹600 / Month</span></span>
+                New Karmic Nagar, Dhanbad
+                <i class="fas fa-fire"></i>
             </div>
 
-            <p>Experience an incredible open gym atmosphere with top-of-the-line free weights and advanced machines. Everything you need for a complete transformation.</p>
-            
-            <div class="action-container">
-                <button id="join-btn" class="btn">Explore Sigma Fitness <i class="fas fa-chevron-down" style="margin-left: 8px;"></i></button>
-                
-                <div class="options-container" id="options">
-                    <a href="equipment.html" class="option-btn"><i class="fas fa-dumbbell"></i> Equipment</a>
-                    <a href="reviews.html" class="option-btn"><i class="fas fa-star"></i> Reviews</a>
-                    <a href="contact.html" class="option-btn"><i class="fas fa-map-marker-alt"></i> Location</a>
+            <h1>THE MOST <em>PREMIUM</em> GYM</h1>
+
+            <!-- Price pill -->
+            <div class="price-pill">
+                <i class="fas fa-fire fire-icon"></i>
+                <div>
+                    <div class="price-pill-text">Monthly Membership — Only</div>
+                    <div class="price-pill-amount">₹600 / Month</div>
                 </div>
+            </div>
+
+            <p class="hero-desc">
+                Open gym packed with top-of-the-line free weights &amp; advanced machines. No treadmills, no gimmicks — just pure, raw, effective training.
+            </p>
+
+            <!-- Buttons -->
+            <div class="btn-row">
+                <button id="join-btn" class="btn-join">
+                    Join Now
+                    <i class="fas fa-arrow-right btn-arrow"></i>
+                </button>
+
+                <button id="explore-btn" class="btn-explore">
+                    <i class="fas fa-dumbbell dumbbell-icon"></i>
+                    Explore Gym
+                    <i class="fas fa-chevron-down" id="explore-chev" style="font-size:0.8rem; transition: transform 0.3s;"></i>
+                </button>
+            </div>
+
+            <!-- Explore Cards -->
+            <div class="explore-cards" id="explore-cards">
+                <a href="equipment.html" class="explore-card">
+                    <div class="explore-card-icon"><i class="fas fa-dumbbell"></i></div>
+                    <div class="explore-card-label">Equipment</div>
+                    <div class="explore-card-sub">Weights & Machines</div>
+                </a>
+                <a href="reviews.html" class="explore-card">
+                    <div class="explore-card-icon"><i class="fas fa-star"></i></div>
+                    <div class="explore-card-label">Reviews</div>
+                    <div class="explore-card-sub">5.0 ★ on Google</div>
+                </a>
+                <a href="location.html" class="explore-card">
+                    <div class="explore-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="explore-card-label">Location</div>
+                    <div class="explore-card-sub">Find Us</div>
+                </a>
             </div>
 
         </div>
     </section>
 
-    <!-- Scripts -->
+    <!-- Policy Modal -->
+    <div class="modal-overlay" id="policy-modal">
+        <div class="modal-box">
+            <div class="modal-head">
+                <div class="modal-head-icon"><i class="fas fa-shield-alt"></i></div>
+                <h2>Gym Policy</h2>
+            </div>
+            <p class="modal-subtitle">Read and agree before joining Sigma Fitness.</p>
+
+            <ul class="policy-list">
+                <li>
+                    <div class="p-icon"><i class="fas fa-rupee-sign"></i></div>
+                    <span><strong>₹200 Refundable Demo Deposit</strong> — Fully refunded if you choose not to join after your demo session.</span>
+                </li>
+                <li>
+                    <div class="p-icon"><i class="fas fa-ban"></i></div>
+                    <span><strong>No Damage to Equipment</strong> — Any damage caused will be the full financial responsibility of the member.</span>
+                </li>
+                <li>
+                    <div class="p-icon"><i class="fas fa-home"></i></div>
+                    <span><strong>No Items to be Taken Home</strong> — No gym property may leave the premises at any time.</span>
+                </li>
+                <li>
+                    <div class="p-icon"><i class="fas fa-calendar-check"></i></div>
+                    <span><strong>Advance Monthly Payment</strong> — ₹600 must be paid at the start of each month without exception.</span>
+                </li>
+                <li>
+                    <div class="p-icon"><i class="fas fa-video"></i></div>
+                    <span><strong>CCTV Surveillance</strong> — The entire premises is recorded 24/7 for the safety of all members.</span>
+                </li>
+                <li>
+                    <div class="p-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <span><strong>Strict Penalty for Theft</strong> — Members caught taking equipment must pay a fine AND return the item. No exceptions.</span>
+                </li>
+            </ul>
+
+            <div class="agree-row">
+                <input type="checkbox" id="agree-check">
+                <label for="agree-check">I have read and agree to all Sigma Fitness policies. I understand that violations may result in membership cancellation and/or financial penalties.</label>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel-modal" id="modal-cancel">Cancel</button>
+                <button class="btn-proceed-modal" id="modal-proceed">
+                    Proceed to Join <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Mobile Menu
         const menuBtn = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
-
         menuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            const icon = menuBtn.querySelector('i');
-            if(navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+            menuBtn.querySelector('i').classList.toggle('fa-bars');
+            menuBtn.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // ── EXPLORE with dumbbell burst ──
+        const exploreBtn  = document.getElementById('explore-btn');
+        const exploreCards = document.getElementById('explore-cards');
+        const burstEl     = document.getElementById('burst');
+        const chevron     = document.getElementById('explore-chev');
+        let exploreOpen = false;
+
+        exploreBtn.addEventListener('click', () => {
+            if (!exploreOpen) {
+                // 1. Burst animation
+                burstEl.classList.remove('animate');
+                void burstEl.offsetWidth;
+                burstEl.classList.add('animate');
+
+                // 2. After burst, reveal cards
+                setTimeout(() => {
+                    exploreCards.classList.add('revealed');
+                    exploreBtn.classList.add('active-state');
+                    chevron.style.transform = 'rotate(180deg)';
+                    exploreOpen = true;
+                }, 400);
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                exploreCards.classList.remove('revealed');
+                exploreBtn.classList.remove('active-state');
+                chevron.style.transform = 'rotate(0deg)';
+                exploreOpen = false;
             }
         });
 
-        // Join Now Button Interaction
-        const joinBtn = document.getElementById('join-btn');
-        const options = document.getElementById('options');
-        const btnIcon = joinBtn.querySelector('i');
+        // ── JOIN NOW → Policy Modal ──
+        const joinBtn    = document.getElementById('join-btn');
+        const modal      = document.getElementById('policy-modal');
+        const cancelBtn  = document.getElementById('modal-cancel');
+        const proceedBtn = document.getElementById('modal-proceed');
+        const agreeCheck = document.getElementById('agree-check');
 
-        joinBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            options.classList.toggle('active');
-            
-            // Rotate arrow icon
-            if(options.classList.contains('active')) {
-                btnIcon.style.transform = 'rotate(180deg)';
-                btnIcon.style.transition = 'transform 0.3s';
-            } else {
-                btnIcon.style.transform = 'rotate(0deg)';
-            }
+        joinBtn.addEventListener('click', () => {
+            agreeCheck.checked = false;
+            proceedBtn.classList.remove('on');
+            modal.classList.add('open');
+        });
+
+        cancelBtn.addEventListener('click', () => modal.classList.remove('open'));
+        modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+        agreeCheck.addEventListener('change', () => {
+            proceedBtn.classList.toggle('on', agreeCheck.checked);
+        });
+
+        proceedBtn.addEventListener('click', () => {
+            if (proceedBtn.classList.contains('on')) window.location.href = 'contact.html';
         });
     </script>
 </body>

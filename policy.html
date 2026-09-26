@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gym Policy | Sigma Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { overflow-y: auto; }
+
+        .policy-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .policy-intro {
+            background: rgba(230,36,41,0.08);
+            border: 1px solid rgba(230,36,41,0.3);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            padding: 20px 25px;
+            margin-bottom: 35px;
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .policy-card {
+            background: #121212;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+
+        .policy-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px 30px;
+            border-bottom: 1px solid #1e1e1e;
+            transition: background 0.3s;
+        }
+
+        .policy-item:last-child { border-bottom: none; }
+
+        .policy-item:hover { background: rgba(230,36,41,0.04); }
+
+        .policy-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(230,36,41,0.12);
+            border: 1px solid rgba(230,36,41,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .policy-icon i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .policy-text h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: white;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .policy-text p {
+            color: #999;
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+
+        .policy-text p strong { color: #ddd; }
+
+        .policy-footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e1e1e;
+            padding-top: 20px;
+        }
+
+        .policy-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="equipment.html">Equipment</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="policy.html" class="active">Policy</a>
+            <a href="location.html">Location</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Gym Policy</h2>
+        </div>
+
+        <div class="policy-wrapper">
+            <div class="policy-intro">
+                <strong style="color: var(--primary);">Welcome to Sigma Fitness.</strong> To ensure a safe, respectful, and premium gym environment for everyone, all members must follow the rules below. Joining the gym means you agree to all of these policies. Please read carefully.
+            </div>
+
+            <div class="policy-card">
+
+                <div class="policy-item">
+                    <div class="policy-icon"><i class="fas fa-rupee-sign"></i></div>
+                    <div class="policy-text">
+                        <h3>₹200 Refundable Demo Deposit</h3>
+                        <p>A security deposit of <strong>₹200</strong> is required for a demo session. This amount will be <strong>fully refunded</strong> if you decide not to join Sigma Fitness after your demo. If you proceed to join, this amount may be adjusted toward your first month's fee.</p>
+                    </div>
+                </div>
+
+                <div class="policy-item">
+                    <div class="policy-icon"><i class="fas fa-ban"></i></div>
+                    <div class="policy-text">
+                        <h3>No Damage to Equipment</h3>
+                        <p>Members are strictly <strong>not allowed to break, misuse, or damage</strong> any gym equipment. Gym equipment is expensive and must be handled with care. Any damage caused will be the <strong>full financial responsibility</strong> of the member who caused it.</p>
+                    </div>
+                </div>
+
+                <div class="policy-item">
+                    <div class="policy-icon"><i class="fas fa-home"></i></div>
+                    <div class="policy-text">
+                        <h3>No Items to be Taken Home</h3>
+                        <p><strong>Absolutely no gym equipment, accessories, or any item</strong> belonging to Sigma Fitness may be taken outside the premises — not during gym hours, not after closing. All items must remain inside the gym at all times.</p>
+                    </div>
+                </div>
+
+                <div class="policy-item">
+                    <div class="policy-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="policy-text">
+                        <h3>Advance Monthly Fee Payment</h3>
+                        <p>All members must pay their monthly membership fee of <strong>₹600 in advance</strong> at the beginning of each month. Failure to pay on time may result in suspension of gym access until payment is cleared.</p>
+                    </div>
+                </div>
+
+                <div class="policy-item">
+                    <div class="policy-icon"><i class="fas fa-video"></i></div>
+                    <div class="policy-text">
+                        <h3>Under CCTV Surveillance</h3>
+                        <p>The entire Sigma Fitness premises is under <strong>24/7 CCTV surveillance</strong>. All activities inside and around the gym are being recorded continuously. This is for the safety and security of all members and staff.</p>
+                    </div>
+                </div>
+
+                <div class="policy-item">
+                    <div class="policy-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <div class="policy-text">
+                        <h3>Strict Penalty for Theft or Misconduct</h3>
+                        <p>If any member is caught taking gym property outside the premises — whether during or after gym hours — they will be required to <strong>pay a penalty fine AND return the item immediately</strong>. Repeat offences may lead to <strong>permanent ban</strong> from the gym. No exceptions will be made.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="policy-footer">
+                By joining Sigma Fitness you agree to all the above policies. <br>
+                Questions? <a href="contact.html">Contact us here</a> or call <a href="tel:+919693482220">+91 9693482220</a>.
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sigma Fitness, Dhanbad. Elevating Fitness.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>

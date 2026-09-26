@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location | Sigma Fitness</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { overflow-y: auto; }
+
+        .location-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            background: var(--bg-lighter);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .location-info {
+            flex: 1;
+            min-width: 280px;
+            padding: 50px;
+        }
+
+        .location-info h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .info-block {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 28px;
+        }
+
+        .info-block i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 4px;
+        }
+
+        .info-block h5 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #aaa;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-block p {
+            color: white;
+            font-size: 1rem;
+        }
+
+        .membership-box {
+            background: rgba(230,36,41,0.08);
+            border: 1px solid rgba(230,36,41,0.3);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            padding: 18px 20px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .membership-box i { color: var(--primary); font-size: 1.5rem; }
+
+        .membership-box .fee-label {
+            color: #aaa;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .membership-box .fee-amount {
+            color: var(--primary);
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .membership-box .fee-sub {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .map-container {
+            flex: 1.2;
+            min-width: 300px;
+            min-height: 420px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .location-info { padding: 30px; }
+            .map-container { min-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Sigma<span>Fitness</span></a>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="equipment.html">Equipment</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="policy.html">Policy</a>
+            <a href="location.html" class="active">Location</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Find Us</h2>
+        </div>
+
+        <div class="location-wrapper">
+            <div class="location-info">
+                <h3>Sigma Fitness</h3>
+
+                <div class="info-block">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h5>Address</h5>
+                        <p>New Karmic Nagar, Dhanbad<br>Jharkhand, India</p>
+                        <p style="color:#777; font-size:0.88rem; margin-top:5px;">Opp. Jingle Bells Fun School, Near DPS School</p>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h5>Opening Hours</h5>
+                        <p>Every Day</p>
+                        <p style="color: var(--primary); font-weight: 600; font-size: 1.15rem;">5:00 AM — 9:30 PM</p>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <i class="fas fa-star"></i>
+                    <div>
+                        <h5>Rating</h5>
+                        <p>⭐⭐⭐⭐⭐ <span style="color:#aaa; font-size:0.9rem;">5.0 on Google</span></p>
+                    </div>
+                </div>
+
+                <!-- Membership Fee -->
+                <div class="membership-box">
+                    <i class="fas fa-tag"></i>
+                    <div>
+                        <div class="fee-label">Monthly Membership</div>
+                        <div class="fee-amount">₹600</div>
+                        <div class="fee-sub">Most affordable premium gym in Dhanbad</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Google Map -->
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.0789822923552!2d86.4498783!3d23.8157903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f6bd09e4246feb%3A0x21cdd5dcbebd47c2!2sSigma%20Fitness!5e0!3m2!1sen!2sin!4v1695167999999!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sigma Fitness, Dhanbad. Elevating Fitness.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    </script>
+</body>
+</html>
